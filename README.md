@@ -1,6 +1,8 @@
-# Android Studio Windows ARM64 - Official Releases & Installers
+# Android Studio for Windows ARM64 (Unofficial)
 
-Welcome to the official repository for native **Windows 11 ARM64** builds of **Android Studio**.
+> **Unofficial build.** This is an independent project. It is not made, endorsed or supported by Google. Android and Android Studio are trademarks of Google LLC.
+
+This repository publishes independent, native **Windows 11 ARM64** builds of **Android Studio**, including an Android Emulator that runs on Windows Hypervisor Platform.
 
 Engineered for full native execution on ARM64-powered Windows laptops, including:
 - **Snapdragon X Elite** & **Snapdragon X Plus**
@@ -12,10 +14,15 @@ Engineered for full native execution on ARM64-powered Windows laptops, including
 
 ## 🚀 Downloads (Latest Release: Android Studio 2026.2.1)
 
-Direct links are available on the [**Latest Release Page**](https://github.com/DevanshSampat/android-studio-arm64-releases/releases/latest):
+Get the installer from the [**latest release**](https://github.com/DevanshSampat/android-studio-arm64-releases/releases/latest):
 
 | Asset | Size | Description |
 |---|---|---|
+| **[AndroidStudio-2026.2.1-Windows-ARM64-Setup.exe](https://github.com/DevanshSampat/android-studio-arm64-releases/releases/latest)** | ~1.5 GB | Installer for Android Studio and the Android Emulator. |
+
+The Portable ZIP and the standalone Layoutlib installer are in the older [v2026.2.1-arm64 release](https://github.com/DevanshSampat/android-studio-arm64-releases/releases/tag/v2026.2.1-arm64).
+
+---|---|---|
 | 📦 **[AndroidStudio-2026.2.1-Windows-ARM64-Setup.exe](https://github.com/DevanshSampat/android-studio-arm64-releases/releases/latest)** | ~1.20 GB | **Recommended Installer**. Registers in Windows Start Menu, Desktop shortcuts, and Apps & Features. |
 | 🗜️ **[AndroidStudio-2026.2.1-Windows-ARM64-Portable.zip](https://github.com/DevanshSampat/android-studio-arm64-releases/releases/latest)** | ~1.47 GB | Standalone Portable Archive. Extract anywhere and launch `bin\studio64.exe`. |
 | 🎨 **[AndroidStudioArm64LayoutlibSetup.exe](https://github.com/DevanshSampat/android-studio-arm64-releases/releases/latest)** | ~20.2 MB | Native ARM64 Layoutlib & Skia graphics engine installer for Compose & XML preview rendering. |
@@ -50,6 +57,7 @@ Unblock-File -Path .\AndroidStudio-2026.2.1-Windows-ARM64-Setup.exe
 
 ## 🛠️ Related Repositories
 
+- [android-emulator-windows-arm64](https://github.com/DevanshSampat/android-emulator-windows-arm64): Source for the Android Emulator on Windows ARM64.
 - [android-studio-tools-base-arm64](https://github.com/DevanshSampat/android-studio-tools-base-arm64): Bazel cross-toolchains & native ARM64 platform targets.
 - [android-studio-tools-adt-idea-arm64](https://github.com/DevanshSampat/android-studio-tools-adt-idea-arm64): Studio packaging & launcher configurations.
 - [layoutlib-windows-arm64](https://github.com/DevanshSampat/layoutlib-windows-arm64): Native Windows ARM64 Layoutlib & Skia graphics runtime.
