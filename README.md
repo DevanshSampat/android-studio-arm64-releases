@@ -2,62 +2,34 @@
 
 > **Unofficial build.** This is an independent project. It is not made, endorsed or supported by Google. Android and Android Studio are trademarks of Google LLC.
 
-This repository publishes independent, native **Windows 11 ARM64** builds of **Android Studio**, including an Android Emulator that runs on Windows Hypervisor Platform.
+This repository publishes Android Studio for **Windows 11 ARM64** PCs (Snapdragon X and similar), together with an Android Emulator that runs on Windows Hypervisor Platform.
 
-Engineered for full native execution on ARM64-powered Windows laptops, including:
-- **Snapdragon X Elite** & **Snapdragon X Plus**
-- **Snapdragon 8cx Gen 3 / Gen 2**
-- **Microsoft SQ3 / SQ2 / SQ1** (Surface Pro 9 5G, Surface Pro X)
-- **All future Windows on ARM PCs**
+## Download
 
----
+Get `AndroidStudio-2026.2.2-Windows-ARM64-Setup.exe` (about 1.5 GB) from the [latest release](https://github.com/DevanshSampat/android-studio-arm64-releases/releases/latest). It installs Android Studio Rabbit 2 (2026.2.2 Patch 1) and the Android Emulator.
 
-## 🚀 Downloads (Latest Release: Android Studio 2026.2.1)
+The installer isn't signed with a commercial certificate, so SmartScreen may say it "prevented an unrecognized app from starting". Choose **More info**, then **Run anyway**. Or unblock it first in PowerShell:
 
-Get the installer from the [**latest release**](https://github.com/DevanshSampat/android-studio-arm64-releases/releases/latest):
-
-| Asset | Size | Description |
-|---|---|---|
-| **[AndroidStudio-2026.2.1-Windows-ARM64-Setup.exe](https://github.com/DevanshSampat/android-studio-arm64-releases/releases/latest)** | ~1.5 GB | Installer for Android Studio and the Android Emulator. |
-
-The Portable ZIP and the standalone Layoutlib installer are in the older [v2026.2.1-arm64 release](https://github.com/DevanshSampat/android-studio-arm64-releases/releases/tag/v2026.2.1-arm64).
-
----|---|---|
-| 📦 **[AndroidStudio-2026.2.1-Windows-ARM64-Setup.exe](https://github.com/DevanshSampat/android-studio-arm64-releases/releases/latest)** | ~1.20 GB | **Recommended Installer**. Registers in Windows Start Menu, Desktop shortcuts, and Apps & Features. |
-| 🗜️ **[AndroidStudio-2026.2.1-Windows-ARM64-Portable.zip](https://github.com/DevanshSampat/android-studio-arm64-releases/releases/latest)** | ~1.47 GB | Standalone Portable Archive. Extract anywhere and launch `bin\studio64.exe`. |
-| 🎨 **[AndroidStudioArm64LayoutlibSetup.exe](https://github.com/DevanshSampat/android-studio-arm64-releases/releases/latest)** | ~20.2 MB | Native ARM64 Layoutlib & Skia graphics engine installer for Compose & XML preview rendering. |
-
----
-
-## 🛡️ Windows Defender SmartScreen Notice
-
-Because these open-source binaries are freshly compiled and not signed with a paid commercial Extended Validation (EV) certificate, Windows SmartScreen will display:
-
-> *"Windows protected your PC: Microsoft Defender SmartScreen prevented an unrecognized app from starting"*
-
-### How to Proceed:
-1. Click **More info** on the prompt.
-2. Click **Run anyway**.
-
-Alternatively, unblock the installer via PowerShell:
 ```powershell
-Unblock-File -Path .\AndroidStudio-2026.2.1-Windows-ARM64-Setup.exe
+Unblock-File -Path .\AndroidStudio-2026.2.2-Windows-ARM64-Setup.exe
 ```
 
----
+## What this build is
 
-## ⚡ Why Native Windows ARM64?
+Google publishes Android Studio for Windows on x64 only. This build runs natively on ARM64:
 
-- **Zero Emulation Overhead**: Runs directly on Cortex-X / Oryon CPU cores without Microsoft Prism or x64 emulation.
-- **Cool & Power Efficient**: Lower battery consumption and minimal thermal throttling during long builds.
-- **Embedded ARM64 OpenJDK**: Comes pre-packaged with ARM64 JetBrains Runtime 21.0.6.
-- **Ultra-fast Native Binaries**: Native `studio64.exe`, `fsnotifier.exe`, `WinProcessListHelper.exe`, `WinShellIntegrationBridge.dll`, and `restarter.exe`.
+- **Android Studio's own code** is Google's official Rabbit 2 release, unchanged. Its Java code is the same on every platform.
+- **Everything that loads into the IDE process is ARM64:** the JetBrains Runtime (Java 25), the launcher and its helpers, and the native libraries for JNA, Skiko, pty4j and SQLite. These come from JetBrains' IntelliJ IDEA for Windows ARM64 on the same platform build (262.10968.63), so each one matches the Java code that calls it.
+- **Layoutlib** (XML and Compose previews) uses ARM64 builds of `layoutlib_jni.dll` and `libandroid_runtime.dll`, compiled from AOSP in [layoutlib-windows-arm64](https://github.com/DevanshSampat/layoutlib-windows-arm64).
+- **Device frames** are converted from WebP to PNG data, because Studio's WebP decoder is x64 only.
+- The About screen says "Unofficial Windows ARM64 build".
 
----
+Some tools Studio starts as separate programs stay x64 and run under Windows' x64 emulation: LLDB, clangd, simpleperf, the trace processor, and the local model server in the Gemini plugin. Five x64-only libraries can't load into an ARM64 process, so the features that need them don't work: WebP image decoding (`image_converter.dll`, `webp_jni.dll`), simpleperf report parsing (`libsimpleperf_report.dll`), an object-tagging profiler agent (`jni_object_tagger.dll`), and whatever uses `video_decoder.dll`, which is new in Rabbit 2.
 
-## 🛠️ Related Repositories
+The assembly script is `installer/assemble_studio.py` in [android-emulator-windows-arm64](https://github.com/DevanshSampat/android-emulator-windows-arm64).
 
-- [android-emulator-windows-arm64](https://github.com/DevanshSampat/android-emulator-windows-arm64): Source for the Android Emulator on Windows ARM64.
-- [android-studio-tools-base-arm64](https://github.com/DevanshSampat/android-studio-tools-base-arm64): Bazel cross-toolchains & native ARM64 platform targets.
-- [android-studio-tools-adt-idea-arm64](https://github.com/DevanshSampat/android-studio-tools-adt-idea-arm64): Studio packaging & launcher configurations.
-- [layoutlib-windows-arm64](https://github.com/DevanshSampat/layoutlib-windows-arm64): Native Windows ARM64 Layoutlib & Skia graphics runtime.
+## Related repositories
+
+- [android-emulator-windows-arm64](https://github.com/DevanshSampat/android-emulator-windows-arm64): the Android Emulator for Windows ARM64, the installer and the Studio assembly script.
+- [layoutlib-windows-arm64](https://github.com/DevanshSampat/layoutlib-windows-arm64): native Windows ARM64 Layoutlib.
+- [android-studio-tools-base-arm64](https://github.com/DevanshSampat/android-studio-tools-base-arm64) and [android-studio-tools-adt-idea-arm64](https://github.com/DevanshSampat/android-studio-tools-adt-idea-arm64): the Bazel setup used to build the 2026.2.1 releases from source. Rabbit 2 releases use Google's published Studio code instead.
