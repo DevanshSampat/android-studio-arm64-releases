@@ -14,6 +14,17 @@ The installer isn't signed with a commercial certificate, so SmartScreen may say
 Unblock-File -Path .\AndroidStudio-2026.2.2-Windows-ARM64-Setup.exe
 ```
 
+## If you used Google's x64 Android Studio before
+
+Gradle may still build with the x64 JDKs it downloaded while you used Google's x64 Studio. They work, but run under Windows' x64 emulation, so Kotlin compilation, KSP and javac take two to several times longer. Gradle doesn't replace them on its own, because it reuses any installed JDK that matches the version a project asks for. To switch to ARM64:
+
+1. Close Android Studio.
+2. In `%USERPROFILE%\.gradle\jdks`, delete the folders with `amd64` or `x64` in their names.
+3. Open Android Studio and sync your project. Gradle downloads ARM64 JDKs when a project asks for one.
+4. In **Settings > Build, Execution, Deployment > Build Tools > Gradle**, check that **Gradle JDK** isn't an x64 JDK.
+
+If a build then fails with "Supplied javaHome must be a valid directory", delete the project's `.gradle\configuration-cache` folder and build again.
+
 ## What this build is
 
 Google publishes Android Studio for Windows on x64 only. This build runs natively on ARM64:
