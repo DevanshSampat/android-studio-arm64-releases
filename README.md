@@ -1,8 +1,8 @@
-# Android Studio for Windows ARM64 (Unofficial)
+# Android Studio for Windows on ARM (Unofficial)
 
 > **Unofficial build.** This is an independent project. It is not made, endorsed or supported by Google. Android and Android Studio are trademarks of Google LLC.
 
-This repository publishes Android Studio for **Windows 11 ARM64** PCs (Snapdragon X and similar), together with an Android Emulator that runs on Windows Hypervisor Platform.
+This repository publishes a native build of Android Studio for **Windows on ARM**: Windows 11 ARM64 PCs such as Snapdragon X Elite and Snapdragon X Plus laptops. It comes with an Android Emulator that runs on Windows Hypervisor Platform, so you can build and run Android apps on an ARM64 Windows laptop without x64 emulation for the IDE.
 
 ## Download
 
