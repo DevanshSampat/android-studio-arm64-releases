@@ -6,7 +6,7 @@ This repository publishes a native build of Android Studio for **Windows on ARM*
 
 ## Download
 
-Get `AndroidStudio-2026.2.3-Windows-ARM64-Setup.exe` (about 1.5 GB) from the [latest release](https://github.com/DevanshSampat/android-studio-arm64-releases/releases/latest). It installs Android Studio Rabbit 3 (2026.2.3 RC 1) and the Android Emulator.
+Get `AndroidStudio-2026.2.3-Windows-ARM64-Setup.exe` (about 1.5 GB) from the [latest release](https://github.com/DevanshSampat/android-studio-arm64-releases/releases/latest). It installs Android Studio Rabbit 3 (2026.2.3 RC 2) and the Android Emulator.
 
 The installer isn't signed with a commercial certificate, so SmartScreen may say it "prevented an unrecognized app from starting". Choose **More info**, then **Run anyway**. Or unblock it first in PowerShell:
 
@@ -29,7 +29,7 @@ If a build then fails with "Supplied javaHome must be a valid directory", delete
 
 Google publishes Android Studio for Windows on x64 only. This build runs natively on ARM64:
 
-- **Android Studio's own code** is Google's official Rabbit 3 RC 1 release, unchanged. Its Java code is the same on every platform.
+- **Android Studio's own code** is Google's official Rabbit 3 RC 2 release, unchanged. Its Java code is the same on every platform.
 - **Everything that loads into the IDE process is ARM64:** the JetBrains Runtime (Java 25), the launcher and its helpers, and the native libraries for JNA, Skiko, pty4j and SQLite. These come from JetBrains' IntelliJ IDEA for Windows ARM64 on the same platform build (262.10968.63), so each one matches the Java code that calls it.
 - **Layoutlib** (XML and Compose previews) uses ARM64 builds of `layoutlib_jni.dll` and `libandroid_runtime.dll`, compiled from AOSP in [layoutlib-windows-arm64](https://github.com/DevanshSampat/layoutlib-windows-arm64).
 - **Device frames** are converted from WebP to PNG data, because Studio's WebP decoder is x64 only.
